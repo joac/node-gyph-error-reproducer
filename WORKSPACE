@@ -45,6 +45,16 @@ load("@aspect_rules_js//npm:npm_import.bzl", "npm_translate_lock")
 npm_translate_lock(
     name = "npm",
     pnpm_lock = "//:pnpm-lock.yaml",
+    lifecycle_hooks_execution_requirements = {
+        "canvas@2.10.2": ["no-sandbox"],
+    },
+    lifecycle_hooks_envs = {
+        "canvas@2.10.2" :[
+            'CPATH=/opt/homebrew/include',
+            'LIBRARY_PATH=/opt/homebrew/lib',
+            'PATH=/opt/homebrew/bin:/usr/bin:/bin',
+        ], 
+    },
 )
 
 load("@npm//:repositories.bzl", "npm_repositories")
